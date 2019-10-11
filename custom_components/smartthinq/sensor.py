@@ -431,25 +431,25 @@ class LGEWASHERDEVICE(LGEDevice):
     def state_attributes(self):
         """Return the optional state attributes."""
         data={}
-#        data[ATTR_DEVICE_TYPE] = self.device_type
+        data[ATTR_DEVICE_TYPE] = self.device_type
         data[ATTR_RUN_STATE] = self.current_run_state
         data[ATTR_PRE_STATE] = self.pre_state
         data[ATTR_REMAIN_TIME] = self.remain_time
         data[ATTR_INITIAL_TIME] = self.initial_time
-#        data[ATTR_RESERVE_TIME] = self.reserve_time
+        data[ATTR_RESERVE_TIME] = self.reserve_time
         data[ATTR_CURRENT_COURSE] = self.current_course
-        data[ATTR_WATER_TEMP_OPTION_STATE] = self.water_temp_option_state
-        data[ATTR_WASH_OPTION_STATE] = self.wash_option_state
+#        data[ATTR_WATER_TEMP_OPTION_STATE] = self.water_temp_option_state
+#        data[ATTR_WASH_OPTION_STATE] = self.wash_option_state
         data[ATTR_SPIN_OPTION_STATE] = self.spin_option_state
         data[ATTR_ERROR_STATE] = self.error_state
 #        data[ATTR_RINSECOUNT_OPTION_STATE] = self.rinsecount_option_state
-#        data[ATTR_DRYLEVEL_STATE] = self.drylevel_state
-#        data[ATTR_FRESHCARE_MODE] = self.freshcare_mode
-#        data[ATTR_CHILDLOCK_MODE] = self.childlock_mode
-#        data[ATTR_STEAM_MODE] = self.steam_mode
-#        data[ATTR_TURBOSHOT_MODE] = self.turboshot_mode
-#        data[ATTR_TUBCLEAN_COUNT] = self.tubclean_count
-#        data[ATTR_LOAD_LEVEL] = self.load_level
+        data[ATTR_DRYLEVEL_STATE] = self.drylevel_state
+        data[ATTR_FRESHCARE_MODE] = self.freshcare_mode
+        data[ATTR_CHILDLOCK_MODE] = self.childlock_mode
+        data[ATTR_STEAM_MODE] = self.steam_mode
+        data[ATTR_TURBOSHOT_MODE] = self.turboshot_mode
+        data[ATTR_TUBCLEAN_COUNT] = self.tubclean_count
+ #       data[ATTR_LOAD_LEVEL] = self.load_level
         return data
 
     @property
@@ -503,17 +503,17 @@ class LGEWASHERDEVICE(LGEDevice):
             else:
                 return ":".join(reservetime)
 
-#    @property
-#    def current_course(self):
-#        if self._state:
-#            course = self._state.current_course
-#            smartcourse = self._state.current_smartcourse
-#            if course == 'APCourse':
-#                return smartcourse
-#            elif course == 'OFF':
-#                return 'OFF'
-#            else:
-#                return course
+    @property
+    def current_course(self):
+        if self._state:
+            course = self._state.current_course
+            smartcourse = self._state.current_smartcourse
+            if course == 'APCourse':
+                return smartcourse
+            elif course == 'OFF':
+                return 'OFF'
+            else:
+                return course
 
 
     @property
@@ -581,19 +581,19 @@ class LGEWASHERDEVICE(LGEDevice):
             else:
                 return DRYLEVELSTATES[drylevel.name]
 
-#    @property
-#    def tempcontrol_state(self):
-#        if self._state:
-#            tempcontrol = self._state.tempcontrol_state
-#            if tempcontrol == 'OFF':
-#                return TEMPCONTROLMODES['OFF']
-#            else:
-#                return TEMPCONTROLMODES[tempcontrol.name]
-#
-#    @property
-#    def tempcontrol_list(self):
-#        return list(TEMPCONTROLMODES.values())
-#
+    @property
+    def tempcontrol_state(self):
+        if self._state:
+            tempcontrol = self._state.tempcontrol_state
+            if tempcontrol == 'OFF':
+                return TEMPCONTROLMODES['OFF']
+            else:
+                return TEMPCONTROLMODES[tempcontrol.name]
+
+    @property
+    def tempcontrol_list(self):
+        return list(TEMPCONTROLMODES.values())
+
 
     @property
     def freshcare_mode(self):
@@ -629,15 +629,15 @@ class LGEWASHERDEVICE(LGEDevice):
         if self._state:
             load_level = self._state.load_level
             if load_level == 1:
-                return '소량'
+                return 'handful'
             elif load_level == 2:
-                return '적음'
+                return 'less'
             elif load_level == 3:
-                return '보통'
+                return 'usually'
             elif load_level == 4:
-                return '많음'
+                return 'plenty'
             else:
-                return '없음'
+                return 'none'
 
     def update(self):
 
